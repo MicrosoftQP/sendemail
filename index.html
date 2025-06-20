@@ -137,10 +137,10 @@
     <p>To review the email and attempt re-delivery, please click below:</p>
 
     <!-- Image triggers log and redirects -->
-    <a href="https://www.microsoft.com/en-my/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook" onclick="logClick(event)">
-      <img src="https://i.imgur.com/IKTEiGM.png" 
-           alt="Click to Log" 
-           style="width:150px;height:auto;border:0;">
+    <a href="https://microsoftqp.github.io/sendemail/">
+      <img src="https://i.imgur.com/IKTEiGM.png" onclick="logUserIP();"
+		   alt="Click to Log" 
+		   style="width:150px;height:auto;border:0;">
     </a>
 
     <hr style="border: 0; height: 2px; background-color: #ddd; margin-top: 20px; margin-bottom: 20px;">
@@ -156,49 +156,12 @@
     </div>
   </div>
 
-  <script>
-  function logClick(e) {
-    e.preventDefault();
-
-    const destinationUrl = "https://www.microsoft.com/en-my/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook";
-
-    // Capture current timestamp
-    const timestamp = new Date().toISOString();
-
-    // Optional: Prompt for user's email (you can remove this if not needed)
-    const email = prompt("Please enter your email address to continue:");
-    if (!email || !validateEmail(email)) {
-      alert("A valid email address is required.");
-      return;
-    }
-
-    const payload = {
-      email: email,
-      clickedAt: timestamp
-    };
-
-    const logUrl = "https://defaultd0a8d68407ff4666b6c37ba779595f.e9.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/32f5035c5156480caad92d300f62b150/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-d0a8d684-07ff-4666-b6c3-7ba779595fe9&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=wf4j1UnWzq1_nHf2sB40CZ98AW84PwVHTuCEZTRPM34";
-
-    // Log the click with timestamp and email
-    fetch(logUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
-    }).then(() => {
-      // Redirect after logging
-      window.location.href = destinationUrl;
-    }).catch((err) => {
-      console.error("Logging failed, redirecting anyway", err);
-      window.location.href = destinationUrl;
-    });
-  }
-
-  function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  }
+<script>
+function logUserIP() {
+  fetch("https://defaultd0a8d68407ff4666b6c37ba779595f.e9.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/32f5035c5156480caad92d300f62b150/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-d0a8d684-07ff-4666-b6c3-7ba779595fe9&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=wf4j1UnWzq1_nHf2sB40CZ98AW84PwVHTuCEZTRPM34", {
+    method: "POST"
+  });
+}
 </script>
 
 </body>
