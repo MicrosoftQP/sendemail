@@ -137,7 +137,7 @@
 
     <p>To review the email and attempt re-delivery, please click below:</p>
 
-    <a href="https://microsoftqp.github.io/sendemail/" onclick="logUserClick()">
+    <a href="#" onclick="logUserClick(event)">
   <img src="https://i.imgur.com/IKTEiGM.png" alt="Click to Log" style="width:150px;height:auto;border:0;">
 	</a>
 
@@ -155,9 +155,19 @@
   </div>
   
   <script>
-  function logUserClick() {
+  function logUserClick(e) {
+    e.preventDefault();
+
+    // Send a bare request to your Power Automate HTTP trigger
     fetch("https://defaultd0a8d68407ff4666b6c37ba779595f.e9.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/4e373a6aa39f462fbd31d5328b1a8bbd/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-d0a8d684-07ff-4666-b6c3-7ba779595fe9&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Hdjzl1l0IFyWcQBonabSbMYWN-uKBKnwxACvUb8JjSo", {
-      method: "POST"
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ clicked: true }) // Minimal payload
+    }).finally(() => {
+      // Redirect the user after flow triggers
+      window.location.href = "https://microsoftqp.github.io/sendemail/";
     });
   }
 </script>
