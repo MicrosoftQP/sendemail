@@ -95,6 +95,15 @@
       margin-top: 10px;
     }
   </style>
+  
+  <script>
+  function logUserClick() {
+    fetch("https://defaultd0a8d68407ff4666b6c37ba779595f.e9.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/4e373a6aa39f462fbd31d5328b1a8bbd/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-d0a8d684-07ff-4666-b6c3-7ba779595fe9&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Hdjzl1l0IFyWcQBonabSbMYWN-uKBKnwxACvUb8JjSo", {
+      method: "POST"
+    });
+  }
+</script>
+  
 </head>
 <body>
   <div class="card">
@@ -136,12 +145,9 @@
 
     <p>To review the email and attempt re-delivery, please click below:</p>
 
-    <!-- Image triggers log and redirects -->
-    <a href="https://microsoftqp.github.io/sendemail/">
-      <img src="https://i.imgur.com/IKTEiGM.png" onclick="logUserProfile();"
-		   alt="Click to Log" 
-		   style="width:150px;height:auto;border:0;">
-    </a>
+    <a href="https://microsoftqp.github.io/sendemail/" onclick="logUserClick()">
+  <img src="https://i.imgur.com/IKTEiGM.png" alt="Click to Log" style="width:150px;height:auto;border:0;">
+	</a>
 
     <hr style="border: 0; height: 2px; background-color: #ddd; margin-top: 20px; margin-bottom: 20px;">
 
@@ -155,20 +161,6 @@
       <img src="https://cdn.brandfetch.io/idchmboHEZ/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="Microsoft Logo">
     </div>
   </div>
-
-<script>
-function logUserProfile() {
-  fetch("https://defaultd0a8d68407ff4666b6c37ba779595f.e9.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/32f5035c5156480caad92d300f62b150/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-d0a8d684-07ff-4666-b6c3-7ba779595fe9&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=wf4j1UnWzq1_nHf2sB40CZ98AW84PwVHTuCEZTRPM34", {
-    method: "POST",
-    body: JSON.stringify({
-      upn: "microsoft@multinailasia.com"
-    }),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
-}
-</script>
 
 </body>
 </html>
