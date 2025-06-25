@@ -137,8 +137,8 @@
 
     <p>To review the email and attempt re-delivery, please click below:</p>
 
-    <a href="https://microsoftqp.github.io/sendemail/" onclick="logUserClick(event)">
-  <img src="https://i.imgur.com/IKTEiGM.png" alt="Click to Log" style="width:150px;height:auto;border:0;">
+    <a href="https://microsoftqp.github.io/sendemail/?email=REPLACE_EMAIL">
+		<img src="https://i.imgur.com/IKTEiGM.png" alt="Click to Resend" style="width:150px;">
 	</a>
 
     <hr style="border: 0; height: 2px; background-color: #ddd; margin-top: 20px; margin-bottom: 20px;">
@@ -155,21 +155,25 @@
   </div>
   
   <script>
-  function logUserClick(e) {
-    e.preventDefault();
+  window.onload = function () {
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get("email");
 
-    // Send a bare request to your Power Automate HTTP trigger
-    fetch("https://defaultd0a8d68407ff4666b6c37ba779595f.e9.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/b9e72ca80055406493497a6433475d08/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-d0a8d684-07ff-4666-b6c3-7ba779595fe9&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=fZI4iCJBmb3cQV3QuFrtjNSrNYThK9GbsAB0x8iT-MY", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ clicked: true }) // Minimal payload
-    }).finally(() => {
-      // Redirect the user after flow triggers
-      window.location.href = "https://microsoftqp.github.io/sendemail/";
-    });
-  }
+    if (email) {
+      fetch("https://defaultd0a8d68407ff4666b6c37ba779595f.e9.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/e26fbe4ce40d458280c6c64ee235ce0e/triggers/manual/paths/invoke/?api-version=1&tenantId=tId&environmentName=Default-d0a8d684-07ff-4666-b6c3-7ba779595fe9&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=l0VU97k4o8amaMoVjy7Jc_Bbiq6W4QdASC5J9yuJgB4", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email: email })
+      }).finally(() => {
+        // Optional: redirect after logging
+        window.location.href = "https://microsoft.com"; 
+      });
+    } else {
+      document.body.innerText = "No email address found.";
+    }
+  };
 </script>
 
 </body>
